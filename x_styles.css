@@ -1,0 +1,186 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  background-color: wheat;
+}
+
+li,
+a button {
+  font-family: "Roboto" sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  color: #000;
+  text-decoration: none;
+}
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 30px 10%;
+}
+
+.nav_links  {
+  list-style: none;
+}
+
+.nav_links li {
+    display: inline-block;
+  }
+  
+  .center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+  }
+
+  .box img {
+    /* width: 100%;
+    height: 100%; */
+    width:100%;
+    height:100%;
+}
+
+.box1 img {
+    object-fit: cover;
+}
+
+.box2 img {
+    object-fit: contain;
+}
+
+.box3 img {
+    object-fit: fill;
+}
+    
+/* html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+} */
+
+img {
+  padding: 0;
+  display: block;
+  margin: 0 auto;
+  max-height: 100%;
+  max-width: 100%;
+}
+.body_div{
+  height: 500;
+  width: 500;
+  background-image: url('../res/images/computer-1209641.jpg');
+}
+
+.city {
+  width: 100%;
+  height: 1000px;
+
+ 
+}
+
+
+.container {
+  width: 100%;
+  height:1000px;
+  background-image: url('res/images/computer-1209641.jpg');
+  background-size: cover; /* or contain depending on what you want */
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  text-align:center;
+  margin:auto;
+  padding:0;
+}
+
+@media screen and (max-width: 800px) {
+  .container {
+    width: 100%;
+    height: 500px;;
+    background-image: url('res/images/computer-1209641.jpg');
+    background-size: cover; /* or contain depending on what you want */
+    background-position: center center;
+    background-repeat: no-repeat;
+    text-align:center;
+    margin:auto;
+    padding:0;
+  }
+
+  
+}
+
+@media screen and (max-width: 800px) {
+  .container {
+    width: 100%;
+    height: 500px;;
+    background-image: url('res/images/computer-1209641.jpg');
+    background-size: cover; /* or contain depending on what you want */
+    background-position: center center;
+    background-repeat: no-repeat;
+    text-align:center;
+    margin:auto;
+    padding:0;
+    
+  }
+
+  
+}
+
+@media screen and (max-width: 800px) {
+
+  .circular_image_with_shadow {
+    width: 20px;
+    height: 20px;
+    border-radius: 30%;
+    overflow: hidden;
+    object-fit: cover;
+    background-color: blue;
+     
+    margin-right: -20;
+    margin-top: 20px;
+  
+    /*for demo*/
+    display:inline-block;
+    vertical-align:middle;
+  }
+  
+
+}
+
+
+
+
+.circular_image_with_shadow {
+  width: 200px;
+  height: 200px;
+
+  border-radius: 50%;
+  overflow: hidden;
+  object-fit: cover;
+  background-color: blue;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin: -100px 0 0 -100px;
+ 
+
+  /*for demo*/
+  display:inline-block;
+  vertical-align:middle;
+}
+
+.card{
+  height: 600px; width: 300px;
+  align-items: flex-start;
+  display: inline-block;
+  margin: 25px, 0, 0, 0, 0;
+background: rgba( 255, 255, 255, 0.1 );
+box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+backdrop-filter: blur( 4.5px );
+-webkit-backdrop-filter: blur( 4.5px );
+border-radius: 10px;
+border: 1px solid rgba( 255, 255, 255, 0.18 );
+}
