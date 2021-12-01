@@ -23,11 +23,13 @@ nav{
 
 nav img{
     width: 60px;  
+    
 }
 
 .nav_link{
     flex: 1;
     text-align: right;
+
 }
 
 .nav_link ul li{
@@ -35,6 +37,7 @@ nav img{
     display: inline-block;
     padding: 8px 12px;
     position: relative;
+
 }
 
 .nav_link ul li a{
@@ -91,9 +94,9 @@ nav img{
 }
 .hero_btn:hover{
     border: 1px solid #ff4f05;
+    text-decoration: none;
      color:#fff;
      background: #ff4f05;
-    
      padding: 12px 34px;
      transition: 1s;
 
