@@ -16,7 +16,12 @@
 }
 
 .btn-resume{
-    background-color: #FF8C8C;
+    background-color: #FF6828;
+}
+
+.btn-resume :hover{
+    background-color: #fcc6afc2;
+
 }
 .bg{
     background-color: #F9F9F9;
@@ -48,9 +53,28 @@
 .ts-18{
     font-size: 18px;
 }
+.ts{
+    font-size: 20px;
+}
+.linkedIn{
+    color: blue ;
+    
+}
 
-@media (min-width: 1200px) {
+@media (min-width: 992px) {
     .container{
         max-width: 990px;
     }
+    .ts{
+        font-size: 30px;
+    }
 }
+@media (max-width: 992px) {
+    .container{
+        max-width: 100%;
+    }
+    .ts{
+        font-size: 20px;
+    }
+}
+
