@@ -2,7 +2,7 @@
     margin: 0;
     padding: 0;
     font-family: 'Poppins', sans-serif;
-    background-color: white;
+    
 }
 
 
@@ -24,4 +24,28 @@
 
 .btn-resume{
     background-color: #FF8C8C;
+}
+.bg{
+    background-color: #F9F9F9;
+}
+.bg-white{
+    background-color: #fff;
+}
+.ts-12{
+    font-size: 12px;
+}
+.ts-14{
+    font-size: 14px;
+}
+.ts-16{
+    font-size: 16px;
+}
+.ts-18{
+    font-size: 18px;
+}
+
+@media (min-width: 1200px) {
+    .container{
+        max-width: 900px;
+    }
 }
