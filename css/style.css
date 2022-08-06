@@ -31,6 +31,18 @@
 .bg-white{
     background-color: #fff;
 }
+.bg-red{
+    background-color: #ff0000;
+}
+.bg-green{
+    background-color: #00ff00;
+}
+
+.sq-30{
+  font-size: 30px;
+}
+
+
 .ts-12{
     font-size: 12px;
 }
@@ -46,6 +58,6 @@
 
 @media (min-width: 1200px) {
     .container{
-        max-width: 900px;
+        max-width: 990px;
     }
 }
