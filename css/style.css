@@ -40,7 +40,13 @@
     background-color: #000000;
     color: white;
 }
-
+.navbarq{
+    position:fixed;
+    width:100%;
+    z-index: 1000000;
+    background-color: white;
+    top:0;
+}
 
 
 .bg{
