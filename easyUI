@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EasyUI Tab Alert Implementation</title>
+    <!-- EasyUI CSS -->
+    <link rel="stylesheet" type="text/css" href="https://www.jeasyui.com/easyui/themes/default/easyui.css">
+    <link rel="stylesheet" type="text/css" href="https://www.jeasyui.com/easyui/themes/icon.css">
+    <!-- jQuery -->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- EasyUI JS -->
+    <script type="text/javascript" src="https://www.jeasyui.com/easyui/jquery.easyui.min.js"></script>
+    
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+        .header {
+            background: #2c3e50;
+            color: white;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 24px;
+            font-weight: 500;
+        }
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+            color: #3498db;
+        }
+        .content {
+            padding: 20px;
+        }
+        .panel {
+            margin-bottom: 20px;
+        }
+        .instructions {
+            background: #f8f9fa;
+            border-left: 4px solid #3498db;
+            padding: 15px;
+            margin-bottom: 25px;
+            border-radius: 4px;
+        }
+        .instructions h3 {
+            margin-top: 0;
+            color: #2c3e50;
+        }
+        .footer {
+            text-align: center;
+            padding: 15px;
+            color: #7f8c8d;
+            font-size: 14px;
+            border-top: 1px solid #ecf0f1;
+        }
+        .tab-icon {
+            margin-right: 5px;
+        }
+        .highlight {
+            color: #e74c3c;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>EasyUI Tab Management</h1>
+            <div class="logo">BANK PORTAL</div>
+        </div>
+        
+        <div class="content">
+            <div class="instructions">
+                <h3>Implementation Note</h3>
+                <p>This implementation demonstrates how to show an alert when clicking on a previously visited tab. The system tracks which tabs you've visited and will notify you when you try to revisit one.</p>
+                <p>Try clicking on the same tab multiple times to see the alert functionality.</p>
+            </div>
+            
+            <div class="panel">
+                <div id="tt" class="easyui-tabs" style="width:100%;height:250px;">
+                    <div title="<span class='tab-icon'>&#9776;</span>Dashboard" style="padding:20px;">
+                        <h3>Dashboard Content</h3>
+                        <p>Welcome to your banking dashboard. Here you can view your accounts, recent transactions, and financial overview.</p>
+                        <div style="margin-top:20px;">
+                            <div class="easyui-panel" title="Account Summary" style="width:100%;max-width:400px;padding:10px;">
+                                <p>Checking Account: $5,243.68</p>
+                                <p>Savings Account: $12,890.42</p>
+                                <p>Credit Card: $-1,245.39</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div title="<span class='tab-icon'>&#128181;</span>Bank Master" style="padding:20px;">
+                        <h3>Bank Master Management</h3>
+                        <p>Manage your bank accounts and settings here.</p>
+                        <ul class="easyui-tree">
+                            <li>Account Management</li>
+                            <li>Transaction History</li>
+                            <li>Transfer Funds</li>
+                            <li>Bill Payments</li>
+                        </ul>
+                    </div>
+                    <div title="<span class='tab-icon'>&#128202;</span>Bank List" style="padding:20px;">
+                        <h3>Bank List</h3>
+                        <p>View and manage your connected banks and financial institutions.</p>
+                        <table class="easyui-datagrid" style="width:100%;height:auto;">
+                            <thead>
+                                <tr>
+                                    <th data-options="field:'name',width:150">Bank Name</th>
+                                    <th data-options="field:'balance',width:100">Balance</th>
+                                    <th data-options="field:'status',width:80">Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>National Bank</td>
+                                    <td>$5,243.68</td>
+                                    <td>Active</td>
+                                </tr>
+                                <tr>
+                                    <td>Global Savings</td>
+                                    <td>$12,890.42</td>
+                                    <td>Active</td>
+                                </tr>
+                                <tr>
+                                    <td>Credit Union</td>
+                                    <td>$3,425.15</td>
+                                    <td>Active</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div title="<span class='tab-icon'>&#128737;</span>Security Settings" style="padding:20px;">
+                        <h3>Security Settings</h3>
+                        <p>Manage your security preferences and authentication methods.</p>
+                        <div class="easyui-panel" title="Security Options" style="width:100%;max-width:400px;padding:10px;">
+                            <div style="margin-bottom:10px">
+                                <input type="checkbox" checked>
+                                <label>Two-Factor Authentication</label>
+                            </div>
+                            <div style="margin-bottom:10px">
+                                <input type="checkbox" checked>
+                                <label>Login Alerts</label>
+                            </div>
+                            <div style="margin-bottom:10px">
+                                <input type="checkbox">
+                                <label>Biometric Login</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="instructions">
+                <h3>How It Works</h3>
+                <p>The solution uses a JavaScript array to track visited tabs. When a tab is selected, the system checks if it has been visited before.</p>
+                <p>If it has, an alert is shown. The code uses EasyUI's <span class="highlight">onSelect</span> event handler to implement this functionality.</p>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>EasyUI Tab Alert Implementation | © 2023 Bank Portal</p>
+        </div>
+    </div>
+
+    <script>
+    $(document).ready(function(){
+        // Array to track visited tabs
+        const visitedTabs = [];
+        
+        // Initialize the tabs
+        $('#tt').tabs({
+            onSelect: function(title, index) {
+                // Check if we've already visited this tab
+                if (visitedTabs.includes(index)) {
+                    // Show alert for revisited tab
+                    $.messager.alert('Tab Visit Notice', 'You have already visited the ' + title + ' tab.', 'info');
+                } else {
+                    // Add to visited tabs
+                    visitedTabs.push(index);
+                    
+                    // Optional: Show a different message for first visit
+                    // $.messager.alert('Welcome', 'First time visiting ' + title, 'info');
+                }
+            }
+        });
+        
+        // Add a button to reset visited tabs for demonstration
+        $('.header').append(
+            '<div style="margin-top:10px;">' +
+            '<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:\'icon-reload\'" onclick="resetVisitedTabs()">Reset Visited Tabs</a>' +
+            '</div>'
+        );
+    });
+    
+    // Function to reset visited tabs (for demonstration)
+    function resetVisitedTabs() {
+        visitedTabs.length = 0;
+        $.messager.alert('Reset Complete', 'The visited tabs history has been cleared.', 'info');
+    }
+    </script>
+</body>
+</html>
