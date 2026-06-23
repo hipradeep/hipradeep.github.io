@@ -1,0 +1,1158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LOG – Build the Life You Mean to Live</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --purple: #6B5CE7;
+    --purple-light: #E8E6F8;
+    --purple-mid: #9B8EF0;
+    --gold: #F5A623;
+    --green: #4CAF88;
+    --soft-bg: #F5F4FD;
+    --card-bg: #FFFFFF;
+    --text-primary: #1A1633;
+    --text-secondary: #6B6785;
+    --text-muted: #A09DC0;
+    --border: rgba(107,92,231,0.12);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--soft-bg);
+    color: var(--text-primary);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 5%;
+    height: 64px;
+    background: rgba(245,244,253,0.88);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 22px;
+    letter-spacing: -0.5px;
+    color: var(--purple);
+  }
+  .nav-logo span { color: var(--text-primary); }
+  .nav-links { display: flex; gap: 32px; list-style: none; }
+  .nav-links a {
+    font-size: 14px; font-weight: 500;
+    color: var(--text-secondary); text-decoration: none;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--purple); }
+  .nav-cta {
+    background: var(--purple); color: #fff;
+    border: none; border-radius: 24px;
+    padding: 9px 22px; font-size: 14px; font-weight: 600;
+    cursor: pointer; font-family: 'Inter', sans-serif;
+    transition: opacity 0.2s, transform 0.15s;
+  }
+  .nav-cta:hover { opacity: 0.88; transform: translateY(-1px); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    gap: 48px;
+    padding: 100px 7% 60px;
+    position: relative;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -100px; right: -100px;
+    width: 600px; height: 600px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(107,92,231,0.10) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-text { max-width: 520px; }
+  .hero-eyebrow {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--purple-light);
+    color: var(--purple);
+    font-size: 12px; font-weight: 600; letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 6px 14px; border-radius: 20px;
+    margin-bottom: 24px;
+  }
+  .hero-eyebrow .dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--purple);
+    animation: pulse 2s infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+  }
+  h1 {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(38px, 5vw, 60px);
+    font-weight: 800;
+    line-height: 1.08;
+    letter-spacing: -2px;
+    color: var(--text-primary);
+    margin-bottom: 20px;
+  }
+  h1 em {
+    font-style: normal;
+    color: var(--purple);
+    position: relative;
+  }
+  h1 em::after {
+    content: '';
+    position: absolute;
+    bottom: 2px; left: 0; right: 0;
+    height: 4px; border-radius: 2px;
+    background: var(--gold);
+    opacity: 0.6;
+  }
+  .hero-desc {
+    font-size: 17px; font-weight: 400; line-height: 1.7;
+    color: var(--text-secondary);
+    margin-bottom: 36px;
+  }
+  .hero-actions { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+  .btn-primary {
+    background: var(--purple); color: #fff;
+    border: none; border-radius: 28px;
+    padding: 14px 32px; font-size: 15px; font-weight: 600;
+    cursor: pointer; font-family: 'Inter', sans-serif;
+    transition: transform 0.15s, box-shadow 0.15s;
+    box-shadow: 0 6px 24px rgba(107,92,231,0.30);
+  }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 32px rgba(107,92,231,0.38); }
+  .btn-secondary {
+    background: transparent; color: var(--purple);
+    border: 1.5px solid var(--purple); border-radius: 28px;
+    padding: 13px 28px; font-size: 15px; font-weight: 600;
+    cursor: pointer; font-family: 'Inter', sans-serif;
+    transition: background 0.15s;
+  }
+  .btn-secondary:hover { background: var(--purple-light); }
+  .hero-stats {
+    display: flex; gap: 32px; margin-top: 44px;
+    padding-top: 28px; border-top: 1px solid var(--border);
+  }
+  .stat-num {
+    font-family: 'Syne', sans-serif;
+    font-size: 28px; font-weight: 800;
+    color: var(--text-primary); line-height: 1;
+  }
+  .stat-label { font-size: 13px; color: var(--text-muted); margin-top: 4px; }
+
+  /* PHONE MOCKUP */
+  .hero-visual {
+    display: flex; justify-content: center; align-items: center;
+    position: relative;
+  }
+  .phone-frame {
+    width: 280px;
+    background: #1A1633;
+    border-radius: 40px;
+    padding: 14px;
+    box-shadow: 0 40px 80px rgba(26,22,51,0.28), 0 0 0 1px rgba(255,255,255,0.06);
+    position: relative;
+    z-index: 2;
+  }
+  .phone-notch {
+    width: 80px; height: 20px;
+    background: #1A1633; border-radius: 0 0 14px 14px;
+    margin: 0 auto -6px;
+    position: relative; z-index: 3;
+  }
+  .phone-screen {
+    background: #F5F4FD;
+    border-radius: 30px;
+    overflow: hidden;
+    height: 520px;
+  }
+  .phone-status-bar {
+    background: #F5F4FD;
+    padding: 8px 16px 0;
+    display: flex; justify-content: space-between; align-items: center;
+    font-size: 10px; font-weight: 600; color: var(--text-primary);
+  }
+  .phone-header {
+    padding: 8px 16px 12px;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .phone-header-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 20px; font-weight: 800; color: var(--text-primary);
+  }
+  .phone-date {
+    font-size: 10px; font-weight: 700; letter-spacing: 0.06em;
+    text-transform: uppercase; color: var(--purple);
+    padding: 0 16px; margin-bottom: 12px;
+  }
+  /* Progress card */
+  .progress-card {
+    margin: 0 12px;
+    background: #fff;
+    border-radius: 18px;
+    padding: 14px;
+    display: flex; justify-content: space-between; align-items: center;
+    box-shadow: 0 2px 12px rgba(107,92,231,0.08);
+  }
+  .progress-card-text { font-size: 11px; }
+  .progress-label { color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.06em; font-size: 9px; margin-bottom: 4px; }
+  .progress-completed { font-family: 'Syne', sans-serif; font-size: 14px; font-weight: 700; color: var(--text-primary); }
+  .progress-stars { font-size: 11px; color: var(--gold); margin-top: 4px; }
+  /* Ring */
+  .ring-wrap { position: relative; width: 56px; height: 56px; }
+  .ring-wrap svg { position: absolute; top: 0; left: 0; transform: rotate(-90deg); }
+  .ring-text {
+    position: absolute; inset: 0;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px; font-weight: 700; color: var(--purple);
+  }
+  /* Quick actions */
+  .quick-section { padding: 14px 12px 0; }
+  .quick-label { font-size: 9px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--purple); margin-bottom: 10px; }
+  .quick-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+  .quick-btn {
+    display: flex; flex-direction: column; align-items: center; gap: 5px;
+  }
+  .quick-icon {
+    width: 40px; height: 40px; border-radius: 14px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px;
+  }
+  .q1 { background: #D6E9FA; }
+  .q2 { background: #E3E0F8; }
+  .q3 { background: #D4EEE2; }
+  .q4 { background: #FAE9D4; }
+  .quick-btn-label { font-size: 9px; color: var(--text-secondary); }
+  /* Activities */
+  .activities-section { padding: 12px 12px 0; }
+  .act-header { display: flex; align-items: center; gap: 5px; margin-bottom: 8px; }
+  .act-title { font-size: 10px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-primary); }
+  .act-list { display: flex; flex-direction: column; gap: 5px; }
+  .act-chip {
+    background: #fff;
+    border-radius: 20px;
+    padding: 7px 12px;
+    font-size: 10px;
+    font-weight: 500;
+    color: var(--text-primary);
+    display: flex; align-items: center; gap: 8px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+  }
+  .act-ring {
+    width: 14px; height: 14px; border-radius: 50%;
+    border: 2px solid var(--purple-light);
+    flex-shrink: 0;
+  }
+  .act-ring.partial { border: 2px solid var(--purple); border-right-color: transparent; transform: rotate(45deg); }
+  .act-ring.done { background: var(--green); border-color: var(--green); }
+  .act-badge {
+    margin-left: auto; background: var(--purple-light);
+    color: var(--purple); font-size: 9px; font-weight: 700;
+    padding: 2px 7px; border-radius: 10px;
+  }
+  /* Floating rings */
+  .float-ring {
+    position: absolute;
+    border-radius: 50%;
+    border: 3px solid var(--purple);
+    opacity: 0.12;
+    pointer-events: none;
+  }
+  .float-ring-1 { width: 200px; height: 200px; top: -40px; right: -60px; animation: floatRing 6s ease-in-out infinite; }
+  .float-ring-2 { width: 120px; height: 120px; bottom: 60px; left: -40px; animation: floatRing 8s ease-in-out infinite reverse; border-color: var(--gold); }
+  @keyframes floatRing {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-16px); }
+  }
+  /* Second phone shadow */
+  .phone-shadow {
+    position: absolute;
+    width: 240px; height: 460px;
+    background: #fff;
+    border-radius: 36px;
+    right: -24px; top: 30px;
+    box-shadow: 0 20px 60px rgba(107,92,231,0.10);
+    border: 1px solid rgba(107,92,231,0.08);
+    z-index: 1;
+  }
+
+  /* FEATURES SECTION */
+  .section { padding: 96px 7%; }
+  .section-eyebrow {
+    font-size: 12px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--purple); margin-bottom: 12px;
+  }
+  .section-title {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(28px, 4vw, 44px); font-weight: 800;
+    line-height: 1.1; letter-spacing: -1.5px;
+    color: var(--text-primary); margin-bottom: 16px;
+    max-width: 560px;
+  }
+  .section-sub {
+    font-size: 16px; line-height: 1.7; color: var(--text-secondary);
+    max-width: 540px; margin-bottom: 60px;
+  }
+
+  .features-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+  .feature-card {
+    background: var(--card-bg);
+    border-radius: 24px;
+    padding: 32px;
+    border: 1px solid var(--border);
+    transition: transform 0.2s, box-shadow 0.2s;
+    position: relative; overflow: hidden;
+  }
+  .feature-card:hover { transform: translateY(-4px); box-shadow: 0 16px 48px rgba(107,92,231,0.10); }
+  .feature-card.accent {
+    background: var(--purple); color: #fff;
+    grid-column: span 1;
+  }
+  .feature-icon {
+    width: 52px; height: 52px; border-radius: 16px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 24px; margin-bottom: 20px;
+  }
+  .fi-purple { background: var(--purple-light); }
+  .fi-gold { background: #FEF3DC; }
+  .fi-green { background: #E0F5EB; }
+  .fi-blue { background: #E0EFFE; }
+  .fi-white { background: rgba(255,255,255,0.15); }
+  .feature-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 20px; font-weight: 700; margin-bottom: 10px;
+  }
+  .feature-card.accent .feature-title { color: #fff; }
+  .feature-desc { font-size: 14px; line-height: 1.7; color: var(--text-secondary); }
+  .feature-card.accent .feature-desc { color: rgba(255,255,255,0.7); }
+  .feature-tag {
+    display: inline-block; margin-top: 16px;
+    font-size: 11px; font-weight: 600; letter-spacing: 0.06em;
+    text-transform: uppercase; color: var(--purple);
+    background: var(--purple-light); padding: 4px 12px; border-radius: 10px;
+  }
+  .feature-card.accent .feature-tag { background: rgba(255,255,255,0.15); color: #fff; }
+  .feature-glow {
+    position: absolute; width: 160px; height: 160px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.07);
+    bottom: -40px; right: -40px;
+    pointer-events: none;
+  }
+
+  /* STATS STRIP */
+  .stats-strip {
+    background: var(--purple);
+    padding: 60px 7%;
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    gap: 24px; text-align: center;
+  }
+  .strip-num {
+    font-family: 'Syne', sans-serif;
+    font-size: 42px; font-weight: 800;
+    color: #fff; line-height: 1;
+  }
+  .strip-label { font-size: 13px; color: rgba(255,255,255,0.6); margin-top: 6px; }
+  .strip-accent { color: var(--gold); }
+
+  /* HOW IT WORKS */
+  .steps-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 24px; position: relative;
+  }
+  .steps-grid::before {
+    content: '';
+    position: absolute;
+    top: 36px; left: calc(16.66% + 8px); right: calc(16.66% + 8px);
+    height: 2px; background: var(--purple-light);
+    z-index: 0;
+  }
+  .step-card {
+    background: var(--card-bg); border-radius: 20px; padding: 28px;
+    border: 1px solid var(--border); text-align: center;
+    position: relative; z-index: 1;
+  }
+  .step-num {
+    width: 52px; height: 52px; border-radius: 50%;
+    background: var(--purple-light);
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 16px;
+    font-family: 'Syne', sans-serif;
+    font-size: 18px; font-weight: 800; color: var(--purple);
+    border: 3px solid var(--card-bg);
+    box-shadow: 0 0 0 1px var(--border);
+  }
+  .step-title { font-family: 'Syne', sans-serif; font-size: 17px; font-weight: 700; margin-bottom: 8px; }
+  .step-desc { font-size: 13px; line-height: 1.65; color: var(--text-secondary); }
+
+  /* ACTIVITIES SHOWCASE */
+  .activities-showcase {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 48px; align-items: center;
+  }
+  .activity-list-demo { display: flex; flex-direction: column; gap: 12px; }
+  .demo-chip {
+    background: var(--card-bg);
+    border-radius: 16px; padding: 14px 18px;
+    display: flex; align-items: center; gap: 14px;
+    border: 1px solid var(--border);
+    transition: transform 0.15s;
+  }
+  .demo-chip:hover { transform: translateX(4px); }
+  .demo-chip-ring {
+    width: 24px; height: 24px; border-radius: 50%;
+    border: 3px solid var(--purple-light); flex-shrink: 0;
+  }
+  .demo-chip-ring.p50 {
+    border-color: var(--purple);
+    border-right-color: transparent; border-bottom-color: transparent;
+    transform: rotate(45deg);
+  }
+  .demo-chip-ring.p75 {
+    border-color: var(--purple);
+    border-right-color: transparent;
+    transform: rotate(45deg);
+  }
+  .demo-chip-ring.done { background: var(--green); border-color: var(--green); }
+  .demo-chip-ring.skip { background: #FFF0E0; border-color: var(--gold); }
+  .demo-chip-content { flex: 1; }
+  .demo-chip-name { font-size: 14px; font-weight: 600; color: var(--text-primary); }
+  .demo-chip-meta { font-size: 12px; color: var(--text-muted); margin-top: 2px; }
+  .demo-chip-badge {
+    font-size: 11px; font-weight: 700;
+    padding: 3px 10px; border-radius: 10px;
+    background: var(--purple-light); color: var(--purple);
+  }
+  .demo-chip-badge.done { background: #E0F5EB; color: var(--green); }
+  .demo-chip-badge.skip { background: #FFF0E0; color: #E07B00; }
+
+  /* BUDGET SECTION */
+  .budget-visual {
+    background: var(--card-bg);
+    border-radius: 24px; padding: 28px;
+    border: 1px solid var(--border);
+  }
+  .bv-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 20px; }
+  .bv-title { font-family: 'Syne', sans-serif; font-size: 18px; font-weight: 700; }
+  .bv-badge { background: var(--purple-light); color: var(--purple); font-size: 11px; font-weight: 700; padding: 4px 12px; border-radius: 10px; }
+  .bv-amounts { display: flex; justify-content: space-between; margin-bottom: 10px; }
+  .bv-spent { font-size: 22px; font-weight: 700; color: #E55; }
+  .bv-limit { font-size: 14px; color: var(--text-muted); padding-top: 6px; }
+  .budget-bar { height: 8px; background: #F0EEF8; border-radius: 4px; overflow: hidden; margin-bottom: 24px; }
+  .budget-fill { height: 100%; border-radius: 4px; background: linear-gradient(90deg, var(--purple), #E55); width: 85%; }
+  .budget-days { display: grid; grid-template-columns: repeat(7, 1fr); gap: 6px; text-align: center; }
+  .day-bar-wrap { display: flex; flex-direction: column; align-items: center; gap: 5px; }
+  .day-bar-outer { height: 60px; display: flex; align-items: flex-end; }
+  .day-bar { width: 24px; border-radius: 4px 4px 0 0; background: var(--purple); opacity: 0.7; transition: opacity 0.2s; }
+  .day-bar:hover { opacity: 1; }
+  .day-bar.highlight { background: var(--gold); opacity: 1; }
+  .day-label { font-size: 9px; color: var(--text-muted); }
+  .day-amount { font-size: 9px; font-weight: 600; color: var(--text-secondary); }
+
+  /* CTA */
+  .cta-section {
+    background: var(--text-primary);
+    padding: 96px 7%; text-align: center;
+    position: relative; overflow: hidden;
+  }
+  .cta-section::before, .cta-section::after {
+    content: '';
+    position: absolute; border-radius: 50%;
+    background: rgba(107,92,231,0.25);
+    pointer-events: none;
+  }
+  .cta-section::before { width: 400px; height: 400px; top: -120px; left: -80px; }
+  .cta-section::after { width: 300px; height: 300px; bottom: -80px; right: -60px; }
+  .cta-title {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(32px, 5vw, 56px); font-weight: 800;
+    color: #fff; line-height: 1.08; letter-spacing: -2px;
+    margin-bottom: 16px; position: relative; z-index: 1;
+  }
+  .cta-title span { color: var(--gold); }
+  .cta-sub { font-size: 17px; color: rgba(255,255,255,0.55); margin-bottom: 36px; position: relative; z-index: 1; }
+  .cta-btns { display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; position: relative; z-index: 1; }
+  .btn-gold {
+    background: var(--gold); color: #1A1633;
+    border: none; border-radius: 28px;
+    padding: 15px 36px; font-size: 15px; font-weight: 700;
+    cursor: pointer; font-family: 'Inter', sans-serif;
+    box-shadow: 0 6px 24px rgba(245,166,35,0.35);
+    transition: transform 0.15s;
+  }
+  .btn-gold:hover { transform: translateY(-2px); }
+  .btn-outline-white {
+    background: transparent; color: #fff;
+    border: 1.5px solid rgba(255,255,255,0.25); border-radius: 28px;
+    padding: 14px 32px; font-size: 15px; font-weight: 600;
+    cursor: pointer; font-family: 'Inter', sans-serif;
+    transition: background 0.15s;
+  }
+  .btn-outline-white:hover { background: rgba(255,255,255,0.06); }
+
+  /* FOOTER */
+  footer {
+    background: #F0EEF8; padding: 40px 7%;
+    display: flex; justify-content: space-between; align-items: center;
+    flex-wrap: wrap; gap: 20px;
+  }
+  .footer-logo {
+    font-family: 'Syne', sans-serif; font-size: 20px; font-weight: 800;
+    color: var(--purple);
+  }
+  .footer-links { display: flex; gap: 24px; }
+  .footer-links a { font-size: 13px; color: var(--text-muted); text-decoration: none; }
+  .footer-links a:hover { color: var(--purple); }
+  .footer-copy { font-size: 12px; color: var(--text-muted); width: 100%; text-align: center; margin-top: 16px; border-top: 1px solid var(--border); padding-top: 20px; }
+
+  /* RESPONSIVE */
+  @media (max-width: 900px) {
+    .hero { grid-template-columns: 1fr; text-align: center; padding-top: 100px; }
+    .hero-visual { display: none; }
+    .hero-actions { justify-content: center; }
+    .hero-stats { justify-content: center; }
+    .features-grid { grid-template-columns: 1fr; }
+    .stats-strip { grid-template-columns: repeat(2, 1fr); }
+    .steps-grid { grid-template-columns: 1fr; }
+    .steps-grid::before { display: none; }
+    .activities-showcase { grid-template-columns: 1fr; }
+    .nav-links { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">L<span>OG</span></div>
+  <ul class="nav-links">
+    <li><a href="#features">Features</a></li>
+    <li><a href="#how">How it works</a></li>
+    <li><a href="#budget">Budget</a></li>
+    <li><a href="#activities">Activities</a></li>
+  </ul>
+  <button class="nav-cta">Get Started Free</button>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-text">
+    <div class="hero-eyebrow"><span class="dot"></span> Your daily life OS</div>
+    <h1>Build the life you <em>mean</em> to live</h1>
+    <p class="hero-desc">LOG brings together habits, milestones, budget, and notes into one beautifully simple daily rhythm — so nothing slips through the cracks.</p>
+    <div class="hero-actions">
+      <button class="btn-primary">Download Free</button>
+      <button class="btn-secondary">See how it works</button>
+    </div>
+    <div class="hero-stats">
+      <div>
+        <div class="stat-num">56★</div>
+        <div class="stat-label">Stars today</div>
+      </div>
+      <div>
+        <div class="stat-num">11</div>
+        <div class="stat-label">Daily activities</div>
+      </div>
+      <div>
+        <div class="stat-num">100%</div>
+        <div class="stat-label">On your terms</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-visual">
+    <div class="float-ring float-ring-1"></div>
+    <div class="float-ring float-ring-2"></div>
+    <div class="phone-shadow"></div>
+    <div class="phone-frame">
+      <div class="phone-notch"></div>
+      <div class="phone-screen">
+        <div class="phone-status-bar">
+          <span>3:14</span><span>◉ 5G</span>
+        </div>
+        <div class="phone-header">
+          <div class="phone-header-title">LOG</div>
+          <div style="width:28px;height:28px;border-radius:50%;background:#E8E6F8;display:flex;align-items:center;justify-content:center;font-size:12px;">📅</div>
+        </div>
+        <div class="phone-date">Tuesday, Jun 23</div>
+        <div class="progress-card">
+          <div class="progress-card-text">
+            <div class="progress-label">Daily Progress</div>
+            <div class="progress-completed">1 of 11 Completed</div>
+            <div class="progress-stars">⭐ 56 Stars Collected</div>
+          </div>
+          <div class="ring-wrap">
+            <svg width="56" height="56" viewBox="0 0 56 56">
+              <circle cx="28" cy="28" r="22" fill="none" stroke="#E8E6F8" stroke-width="5"/>
+              <circle cx="28" cy="28" r="22" fill="none" stroke="#6B5CE7" stroke-width="5"
+                stroke-dasharray="138.2" stroke-dashoffset="110.6" stroke-linecap="round"/>
+            </svg>
+            <div class="ring-text">20%</div>
+          </div>
+        </div>
+        <div class="quick-section">
+          <div class="quick-label">Quick Actions</div>
+          <div class="quick-grid">
+            <div class="quick-btn"><div class="quick-icon q1">💧</div><div class="quick-btn-label">Water</div></div>
+            <div class="quick-btn"><div class="quick-icon q2">📝</div><div class="quick-btn-label">Journal</div></div>
+            <div class="quick-btn"><div class="quick-icon q3">💵</div><div class="quick-btn-label">Expense</div></div>
+            <div class="quick-btn"><div class="quick-icon q4">📅</div><div class="quick-btn-label">Planner</div></div>
+          </div>
+        </div>
+        <div class="activities-section">
+          <div class="act-header">
+            <span style="font-size:12px;">⭐</span>
+            <div class="act-title">Active Activities</div>
+          </div>
+          <div class="act-list">
+            <div class="act-chip"><div class="act-ring done"></div>☀️ Morning Walk<span class="act-badge" style="background:#E0F5EB;color:#4CAF88;">Done</span></div>
+            <div class="act-chip"><div class="act-ring partial"></div>💧 Water Intake<span class="act-badge">5/8</span></div>
+            <div class="act-chip"><div class="act-ring partial"></div>📖 Read 20 mins<span class="act-badge">1/2</span></div>
+            <div class="act-chip"><div class="act-ring"></div>🧘 Meditation</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section class="section" id="features">
+  <div class="section-eyebrow">Everything in one place</div>
+  <div class="section-title">Four pillars of a purposeful day</div>
+  <p class="section-sub">Each section of LOG is crafted to reduce friction and make your daily practice feel effortless and rewarding.</p>
+
+  <div class="features-grid">
+    <div class="feature-card accent">
+      <div class="feature-icon fi-white">📋</div>
+      <div class="feature-title">Daily Log</div>
+      <p class="feature-desc">Track every habit, skip, and win in real-time. The circular progress ring keeps your day's momentum visible at a glance.</p>
+      <span class="feature-tag">Core</span>
+      <div class="feature-glow"></div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon fi-gold">🏆</div>
+      <div class="feature-title">Milestones</div>
+      <p class="feature-desc">Set future goals, break them into sub-tasks, and watch your completed milestones stack up. Stars and timers keep you accountable.</p>
+      <span class="feature-tag">Goals</span>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon fi-green">💰</div>
+      <div class="feature-title">Budget Tracker</div>
+      <p class="feature-desc">Visualise your 7-day spending pattern, stay within monthly limits, and log expenses in seconds — categorised automatically.</p>
+      <span class="feature-tag">Finance</span>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon fi-blue">📒</div>
+      <div class="feature-title">Notes</div>
+      <p class="feature-desc">Capture ideas, dev logs, and pinned reminders. Notes stay organised with tags and are always one tap away from your daily log.</p>
+      <span class="feature-tag">Capture</span>
+    </div>
+  </div>
+</section>
+
+<!-- STATS STRIP -->
+<div class="stats-strip">
+  <div>
+    <div class="strip-num">11<span class="strip-accent">+</span></div>
+    <div class="strip-label">Activities tracked daily</div>
+  </div>
+  <div>
+    <div class="strip-num">5<span class="strip-accent">k</span></div>
+    <div class="strip-label">Milestones completed</div>
+  </div>
+  <div>
+    <div class="strip-num">₹5k</div>
+    <div class="strip-label">Average monthly budget</div>
+  </div>
+  <div>
+    <div class="strip-num">56<span class="strip-accent">★</span></div>
+    <div class="strip-label">Stars per day average</div>
+  </div>
+</div>
+
+<!-- HOW IT WORKS -->
+<section class="section" id="how">
+  <div class="section-eyebrow">Simple by design</div>
+  <div class="section-title">Three steps to a better day</div>
+  <p class="section-sub">LOG is built for consistency, not complexity. Set it up once and your routine runs itself.</p>
+
+  <div class="steps-grid">
+    <div class="step-card">
+      <div class="step-num">01</div>
+      <div class="step-title">Set your activities</div>
+      <p class="step-desc">Add daily habits, sleep goals, focus blocks, and recurring tasks. Assign timers, sub-tasks, and star rewards to each.</p>
+    </div>
+    <div class="step-card">
+      <div class="step-num">02</div>
+      <div class="step-title">Log as you go</div>
+      <p class="step-desc">Tap to complete, skip, or partially finish. The progress ring updates in real-time, keeping your momentum in view all day.</p>
+    </div>
+    <div class="step-card">
+      <div class="step-num">03</div>
+      <div class="step-title">Review and grow</div>
+      <p class="step-desc">See milestones reached, budgets respected, and streaks built. Each completed day adds to your growing collection of stars.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ACTIVITIES SHOWCASE -->
+<section class="section" id="activities" style="background: var(--card-bg);">
+  <div class="section-eyebrow" style="text-align:center;">Activity tracking</div>
+  <div class="section-title" style="text-align:center;max-width:100%;margin-bottom:10px;">Track anything that matters to you</div>
+  <p class="section-sub" style="text-align:center;max-width:640px;margin:0 auto 52px;">Morning routines, fitness, focus sessions, self-care, learning — LOG works for every lifestyle. Here are some of the most popular ways people use it.</p>
+
+  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:40px;">
+
+    <!-- Health & Fitness -->
+    <div style="background:var(--soft-bg);border-radius:20px;padding:24px;border:1px solid var(--border);">
+      <div style="font-size:22px;margin-bottom:10px;">🏋️</div>
+      <div style="font-family:'Syne',sans-serif;font-size:15px;font-weight:700;margin-bottom:14px;color:var(--text-primary);">Health & Fitness</div>
+      <div class="activity-list-demo" style="gap:8px;">
+        <div class="demo-chip" style="padding:10px 12px;">
+          <div class="demo-chip-ring done"></div>
+          <div class="demo-chip-content"><div class="demo-chip-name" style="font-size:13px;">Morning Run</div><div class="demo-chip-meta">30 min • 6:00 AM</div></div>
+          <span class="demo-chip-badge done" style="font-size:10px;">Done ✓</span>
+        </div>
+        <div class="demo-chip" style="padding:10px 12px;">
+          <div class="demo-chip-ring p75"></div>
+          <div class="demo-chip-content"><div class="demo-chip-name" style="font-size:13px;">💧 Water Intake</div><div class="demo-chip-meta">6 of 8 glasses</div></div>
+          <span class="demo-chip-badge" style="font-size:10px;">6/8</span>
+        </div>
+        <div class="demo-chip" style="padding:10px 12px;">
+          <div class="demo-chip-ring"></div>
+          <div class="demo-chip-content"><div class="demo-chip-name" style="font-size:13px;">Evening Workout</div><div class="demo-chip-meta">7:00 – 8:00 PM</div></div>
+        </div>
+        <div class="demo-chip" style="padding:10px 12px;">
+          <div class="demo-chip-ring skip"></div>
+          <div class="demo-chip-content"><div class="demo-chip-name" style="font-size:13px;">Cold Shower</div><div class="demo-chip-meta">Skipped today</div></div>
+          <span class="demo-chip-badge skip" style="font-size:10px;">Skip</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mind & Wellbeing -->
+    <div style="background:var(--soft-bg);border-radius:20px;padding:24px;border:1px solid var(--border);">
+      <div style="font-size:22px;margin-bottom:10px;">🧠</div>
+      <div style="font-family:'Syne',sans-serif;font-size:15px;font-weight:700;margin-bottom:14px;color:var(--text-primary);">Mind & Wellbeing</div>
+      <div class="activity-list-demo" style="gap:8px;">
+        <div class="demo-chip" style="padding:10px 12px;">
+          <div class="demo-chip-ring done"></div>
+          <div class="demo-chip-content"><div class="demo-chip-name" style="font-size:13px;">🧘 Meditation</div><div class="demo-chip-meta">10 min • Morning</div></div>
+          <span class="demo-chip-badge done" style="font-size:10px;">Done ✓</span>
+        </div>
+        <div class="demo-chip" style="padding:10px 12px;">
+          <div class="demo-chip-ring done"></div>
+          <div class="demo-chip-content"><div class="demo-chip-name" style="font-size:13px;">Gratitude Journal</div><div class="demo-chip-meta">3 things noted</div></div>
+          <span class="demo-chip-badge done" style="font-size:10px;">Done ✓</span>
+        </div>
+        <div class="demo-chip" style="padding:10px 12px;">
+          <div class="demo-chip-ring p50"></div>
+          <div class="demo-chip-content"><div class="demo-chip-name" style="font-size:13px;">📖 Read 30 mins</div><div class="demo-chip-meta">15 min done</div></div>
+          <span class="demo-chip-badge" style="font-size:10px;">1/2</span>
+        </div>
+        <div class="demo-chip" style="padding:10px 12px;">
+          <div class="demo-chip-ring"></div>
+          <div class="demo-chip-content"><div class="demo-chip-name" style="font-size:13px;">😴 Sleep by 10 PM</div><div class="demo-chip-meta">Goal: 8 hours</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Learning & Growth -->
+    <div style="background:var(--soft-bg);border-radius:20px;padding:24px;border:1px solid var(--border);">
+      <div style="font-size:22px;margin-bottom:10px;">📚</div>
+      <div style="font-family:'Syne',sans-serif;font-size:15px;font-weight:700;margin-bottom:14px;color:var(--text-primary);">Learning & Growth</div>
+      <div class="activity-list-demo" style="gap:8px;">
+        <div class="demo-chip" style="padding:10px 12px;">
+          <div class="demo-chip-ring done"></div>
+          <div class="demo-chip-content"><div class="demo-chip-name" style="font-size:13px;">Online Course</div><div class="demo-chip-meta">1 lesson complete</div></div>
+          <span class="demo-chip-badge done" style="font-size:10px;">Done ✓</span>
+        </div>
+        <div class="demo-chip" style="padding:10px 12px;">
+          <div class="demo-chip-ring p50"></div>
+          <div class="demo-chip-content"><div class="demo-chip-name" style="font-size:13px;">Practice Language</div><div class="demo-chip-meta">15 min of 30</div></div>
+          <span class="demo-chip-badge" style="font-size:10px;">1/2</span>
+        </div>
+        <div class="demo-chip" style="padding:10px 12px;">
+          <div class="demo-chip-ring"></div>
+          <div class="demo-chip-content"><div class="demo-chip-name" style="font-size:13px;">✍️ Write 500 words</div><div class="demo-chip-meta">Creative practice</div></div>
+        </div>
+        <div class="demo-chip" style="padding:10px 12px;">
+          <div class="demo-chip-ring"></div>
+          <div class="demo-chip-content"><div class="demo-chip-name" style="font-size:13px;">No Social Media</div><div class="demo-chip-meta">Until 6 PM</div></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Second row: more categories -->
+  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;">
+
+    <!-- Self-Care -->
+    <div style="background:var(--soft-bg);border-radius:20px;padding:24px;border:1px solid var(--border);">
+      <div style="font-size:22px;margin-bottom:10px;">✨</div>
+      <div style="font-family:'Syne',sans-serif;font-size:15px;font-weight:700;margin-bottom:14px;color:var(--text-primary);">Self-Care</div>
+      <div class="activity-list-demo" style="gap:8px;">
+        <div class="demo-chip" style="padding:10px 12px;">
+          <div class="demo-chip-ring done"></div>
+          <div class="demo-chip-content"><div class="demo-chip-name" style="font-size:13px;">Skincare Routine</div><div class="demo-chip-meta">Morning done</div></div>
+          <span class="demo-chip-badge done" style="font-size:10px;">Done ✓</span>
+        </div>
+        <div class="demo-chip" style="padding:10px 12px;">
+          <div class="demo-chip-ring p75"></div>
+          <div class="demo-chip-content"><div class="demo-chip-name" style="font-size:13px;">Vitamins & Meds</div><div class="demo-chip-meta">2 of 3 taken</div></div>
+          <span class="demo-chip-badge" style="font-size:10px;">2/3</span>
+        </div>
+        <div class="demo-chip" style="padding:10px 12px;">
+          <div class="demo-chip-ring"></div>
+          <div class="demo-chip-content"><div class="demo-chip-name" style="font-size:13px;">🚶 10,000 Steps</div><div class="demo-chip-meta">Walk goal</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Nutrition -->
+    <div style="background:var(--soft-bg);border-radius:20px;padding:24px;border:1px solid var(--border);">
+      <div style="font-size:22px;margin-bottom:10px;">🥗</div>
+      <div style="font-family:'Syne',sans-serif;font-size:15px;font-weight:700;margin-bottom:14px;color:var(--text-primary);">Nutrition</div>
+      <div class="activity-list-demo" style="gap:8px;">
+        <div class="demo-chip" style="padding:10px 12px;">
+          <div class="demo-chip-ring done"></div>
+          <div class="demo-chip-content"><div class="demo-chip-name" style="font-size:13px;">Healthy Breakfast</div><div class="demo-chip-meta">No junk food</div></div>
+          <span class="demo-chip-badge done" style="font-size:10px;">Done ✓</span>
+        </div>
+        <div class="demo-chip" style="padding:10px 12px;">
+          <div class="demo-chip-ring"></div>
+          <div class="demo-chip-content"><div class="demo-chip-name" style="font-size:13px;">Skip Late Snacks</div><div class="demo-chip-meta">After 8 PM</div></div>
+        </div>
+        <div class="demo-chip" style="padding:10px 12px;">
+          <div class="demo-chip-ring skip"></div>
+          <div class="demo-chip-content"><div class="demo-chip-name" style="font-size:13px;">No Caffeine PM</div><div class="demo-chip-meta">After 2 PM</div></div>
+          <span class="demo-chip-badge skip" style="font-size:10px;">Skip</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Productivity -->
+    <div style="background:var(--soft-bg);border-radius:20px;padding:24px;border:1px solid var(--border);">
+      <div style="font-size:22px;margin-bottom:10px;">⚡</div>
+      <div style="font-family:'Syne',sans-serif;font-size:15px;font-weight:700;margin-bottom:14px;color:var(--text-primary);">Productivity</div>
+      <div class="activity-list-demo" style="gap:8px;">
+        <div class="demo-chip" style="padding:10px 12px;">
+          <div class="demo-chip-ring done"></div>
+          <div class="demo-chip-content"><div class="demo-chip-name" style="font-size:13px;">🌅 Wake Up 6 AM</div><div class="demo-chip-meta">On time today</div></div>
+          <span class="demo-chip-badge done" style="font-size:10px;">Done ✓</span>
+        </div>
+        <div class="demo-chip" style="padding:10px 12px;">
+          <div class="demo-chip-ring p50"></div>
+          <div class="demo-chip-content"><div class="demo-chip-name" style="font-size:13px;">Deep Work Block</div><div class="demo-chip-meta">2 of 4 hours</div></div>
+          <span class="demo-chip-badge" style="font-size:10px;">2/4</span>
+        </div>
+        <div class="demo-chip" style="padding:10px 12px;">
+          <div class="demo-chip-ring"></div>
+          <div class="demo-chip-content"><div class="demo-chip-name" style="font-size:13px;">Review To-Do List</div><div class="demo-chip-meta">Evening review</div></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div style="text-align:center;margin-top:44px;">
+    <button class="btn-primary">Start tracking your habits →</button>
+  </div>
+</section>
+
+<!-- BUDGET SHOWCASE -->
+<section class="section" id="budget">
+  <div style="text-align:center;margin-bottom:52px;">
+    <div class="section-eyebrow" style="display:inline-block;">Smart budgeting</div>
+    <div class="section-title" style="max-width:100%;margin-top:8px;">Know where every rupee goes</div>
+    <p class="section-sub" style="max-width:560px;margin:12px auto 0;">Set limits, log in seconds, and see your spending pattern before it becomes a problem.</p>
+  </div>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start;">
+
+    <!-- LEFT: faithful app UI replica -->
+    <div style="background:#fff;border-radius:28px;border:1px solid var(--border);overflow:hidden;box-shadow:0 8px 40px rgba(107,92,231,0.08);">
+
+      <!-- Budget selector bar -->
+      <div style="padding:16px 20px 0;display:flex;align-items:center;justify-content:space-between;">
+        <div style="display:flex;align-items:center;gap:8px;background:var(--soft-bg);border:1px solid var(--border);border-radius:10px;padding:8px 14px;font-size:13px;font-weight:600;color:var(--text-primary);">
+          Budget PRO 🎯 <span style="color:var(--text-muted);font-size:11px;margin-left:4px;">▾</span>
+        </div>
+        <div style="display:flex;gap:8px;">
+          <div style="width:34px;height:34px;border-radius:10px;background:var(--soft-bg);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:15px;">📅</div>
+          <div style="width:34px;height:34px;border-radius:10px;background:#FFE8E8;border:1px solid #FFB3B3;display:flex;align-items:center;justify-content:center;font-size:15px;">⊘</div>
+          <div style="width:34px;height:34px;border-radius:10px;background:var(--purple-light);border:1px solid rgba(107,92,231,0.2);display:flex;align-items:center;justify-content:center;font-size:15px;">🔔</div>
+        </div>
+      </div>
+
+      <!-- Over-limit card -->
+      <div style="margin:14px 16px 0;padding:16px 18px;border-radius:18px;border:1.5px solid #FFBCBC;background:#FFF5F5;">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:4px;">
+          <div style="font-family:'Syne',sans-serif;font-size:16px;font-weight:800;color:var(--text-primary);">Budget PRO 🎯</div>
+          <div style="display:flex;gap:6px;">
+            <span style="background:#F0EEF8;color:var(--purple);font-size:10px;font-weight:700;padding:3px 10px;border-radius:8px;">EXPENSES</span>
+            <span style="background:#F0EEF8;color:var(--purple);font-size:10px;font-weight:700;padding:3px 10px;border-radius:8px;">MONTHLY</span>
+            <div style="width:24px;height:24px;border-radius:6px;background:#FFE8E8;display:flex;align-items:center;justify-content:center;font-size:11px;">⊘</div>
+          </div>
+        </div>
+        <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:10px;">
+          <div style="font-size:22px;font-weight:700;color:#D93030;">Spent: ₹6,549</div>
+          <div style="font-size:13px;color:var(--text-muted);">Limit: ₹5,000</div>
+        </div>
+        <!-- Over-limit progress bar -->
+        <div style="height:8px;background:#FFD6D6;border-radius:4px;overflow:visible;position:relative;">
+          <div style="position:absolute;left:0;top:0;bottom:0;width:76.5%;background:linear-gradient(90deg,#E55,#D93030);border-radius:4px 0 0 4px;"></div>
+          <div style="position:absolute;left:calc(76.5% - 8px);top:-4px;width:16px;height:16px;border-radius:50%;background:#D93030;border:2px solid #fff;box-shadow:0 1px 4px rgba(0,0,0,0.15);"></div>
+        </div>
+        <div style="margin-top:8px;font-size:11px;color:#D93030;font-weight:600;">⚠ ₹1,549 over budget this month</div>
+      </div>
+
+      <!-- 7-Day chart card -->
+      <div style="margin:12px 16px 0;padding:16px 18px;border-radius:18px;border:1px solid var(--border);background:#FAFAFE;">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;">
+          <div style="font-family:'Syne',sans-serif;font-size:14px;font-weight:700;color:var(--text-primary);">7-Day Expenses</div>
+          <div style="display:flex;gap:4px;">
+            <span style="background:var(--purple);color:#fff;font-size:11px;font-weight:700;padding:3px 12px;border-radius:8px;">W</span>
+            <span style="background:var(--soft-bg);color:var(--text-muted);font-size:11px;font-weight:700;padding:3px 12px;border-radius:8px;border:1px solid var(--border);">M</span>
+          </div>
+        </div>
+        <div style="display:flex;justify-content:space-between;font-size:12px;color:var(--text-muted);margin-bottom:14px;">
+          <span>Avg: ₹574</span><span>Total: ₹4,022</span>
+        </div>
+        <!-- Bar chart -->
+        <div style="display:grid;grid-template-columns:repeat(7,1fr);gap:4px;align-items:end;">
+          <!-- Wed -->
+          <div style="display:flex;flex-direction:column;align-items:center;gap:4px;">
+            <div style="font-size:9px;font-weight:600;color:var(--text-secondary);">₹676</div>
+            <div style="width:100%;border-radius:5px 5px 0 0;background:var(--purple);opacity:0.75;height:36px;"></div>
+            <div style="font-size:9px;color:var(--text-muted);text-align:center;line-height:1.2;">Wed<br><span style="font-size:8px;">17</span></div>
+          </div>
+          <!-- Thu -->
+          <div style="display:flex;flex-direction:column;align-items:center;gap:4px;">
+            <div style="font-size:9px;font-weight:600;color:var(--text-secondary);">₹58</div>
+            <div style="width:100%;border-radius:5px 5px 0 0;background:var(--purple);opacity:0.75;height:4px;"></div>
+            <div style="font-size:9px;color:var(--text-muted);text-align:center;line-height:1.2;">Thu<br><span style="font-size:8px;">18</span></div>
+          </div>
+          <!-- Fri -->
+          <div style="display:flex;flex-direction:column;align-items:center;gap:4px;">
+            <div style="font-size:9px;font-weight:600;color:var(--text-secondary);">₹441</div>
+            <div style="width:100%;border-radius:5px 5px 0 0;background:var(--purple);opacity:0.75;height:22px;"></div>
+            <div style="font-size:9px;color:var(--text-muted);text-align:center;line-height:1.2;">Fri<br><span style="font-size:8px;">19</span></div>
+          </div>
+          <!-- Sat -->
+          <div style="display:flex;flex-direction:column;align-items:center;gap:4px;">
+            <div style="font-size:9px;font-weight:600;color:var(--text-secondary);">₹1.1k</div>
+            <div style="width:100%;border-radius:5px 5px 0 0;background:var(--purple);opacity:0.75;height:44px;"></div>
+            <div style="font-size:9px;color:var(--text-muted);text-align:center;line-height:1.2;">Sat<br><span style="font-size:8px;">20</span></div>
+          </div>
+          <!-- Sun — tallest, highlighted -->
+          <div style="display:flex;flex-direction:column;align-items:center;gap:4px;">
+            <div style="font-size:9px;font-weight:600;color:var(--purple);">₹1.5k</div>
+            <div style="width:100%;border-radius:5px 5px 0 0;background:var(--purple);height:60px;"></div>
+            <div style="font-size:9px;color:var(--purple);font-weight:700;text-align:center;line-height:1.2;">Sun<br><span style="font-size:8px;">21</span></div>
+          </div>
+          <!-- Mon -->
+          <div style="display:flex;flex-direction:column;align-items:center;gap:4px;">
+            <div style="font-size:9px;font-weight:600;color:var(--text-secondary);">₹250</div>
+            <div style="width:100%;border-radius:5px 5px 0 0;background:var(--purple);opacity:0.4;height:12px;"></div>
+            <div style="font-size:9px;color:var(--text-muted);text-align:center;line-height:1.2;">Mon<br><span style="font-size:8px;">22</span></div>
+          </div>
+          <!-- Tue — today, empty -->
+          <div style="display:flex;flex-direction:column;align-items:center;gap:4px;">
+            <div style="font-size:9px;font-weight:600;color:var(--text-muted);">—</div>
+            <div style="width:100%;border-radius:5px 5px 0 0;background:var(--border);height:4px;"></div>
+            <div style="font-size:9px;color:var(--text-muted);text-align:center;line-height:1.2;">Tue<br><span style="font-size:8px;">23</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Expense history -->
+      <div style="padding:14px 20px 6px;">
+        <div style="font-family:'Syne',sans-serif;font-size:13px;font-weight:700;color:var(--text-primary);margin-bottom:10px;">Expense History</div>
+        <!-- Row 1 -->
+        <div style="display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid var(--border);">
+          <div style="width:36px;height:36px;border-radius:12px;background:#E0F5EB;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;">🛒</div>
+          <div style="flex:1;min-width:0;">
+            <div style="font-size:12px;font-weight:600;color:var(--text-primary);">Grocery | Dahi Soya</div>
+            <div style="font-size:10px;color:var(--text-muted);">22 Jun 2026 · 10:29 PM</div>
+          </div>
+          <div style="font-size:13px;font-weight:700;color:#D93030;flex-shrink:0;">−₹320</div>
+        </div>
+        <!-- Row 2 -->
+        <div style="display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid var(--border);">
+          <div style="width:36px;height:36px;border-radius:12px;background:#E8E6F8;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;">💊</div>
+          <div style="flex:1;min-width:0;">
+            <div style="font-size:12px;font-weight:600;color:var(--text-primary);">Supplements | D3, B12</div>
+            <div style="font-size:10px;color:var(--text-muted);">22 Jun 2026 · 9:15 PM</div>
+          </div>
+          <div style="font-size:13px;font-weight:700;color:#D93030;flex-shrink:0;">−₹480</div>
+        </div>
+        <!-- Row 3 -->
+        <div style="display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid var(--border);">
+          <div style="width:36px;height:36px;border-radius:12px;background:#FEF3DC;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;">🍽️</div>
+          <div style="flex:1;min-width:0;">
+            <div style="font-size:12px;font-weight:600;color:var(--text-primary);">Dining | Lunch</div>
+            <div style="font-size:10px;color:var(--text-muted);">21 Jun 2026 · 1:45 PM</div>
+          </div>
+          <div style="font-size:13px;font-weight:700;color:#D93030;flex-shrink:0;">−₹220</div>
+        </div>
+        <!-- Row 4 -->
+        <div style="display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid var(--border);">
+          <div style="width:36px;height:36px;border-radius:12px;background:#E6F1FB;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;">🚇</div>
+          <div style="flex:1;min-width:0;">
+            <div style="font-size:12px;font-weight:600;color:var(--text-primary);">Transport | Metro Card</div>
+            <div style="font-size:10px;color:var(--text-muted);">21 Jun 2026 · 9:02 AM</div>
+          </div>
+          <div style="font-size:13px;font-weight:700;color:#D93030;flex-shrink:0;">−₹150</div>
+        </div>
+        <!-- Row 5 -->
+        <div style="display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid var(--border);">
+          <div style="width:36px;height:36px;border-radius:12px;background:#FCE8F3;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;">☕</div>
+          <div style="flex:1;min-width:0;">
+            <div style="font-size:12px;font-weight:600;color:var(--text-primary);">Café | Cold Coffee</div>
+            <div style="font-size:10px;color:var(--text-muted);">20 Jun 2026 · 4:17 PM</div>
+          </div>
+          <div style="font-size:13px;font-weight:700;color:#D93030;flex-shrink:0;">−₹180</div>
+        </div>
+        <!-- Row 6 -->
+        <div style="display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid var(--border);">
+          <div style="width:36px;height:36px;border-radius:12px;background:#E0F5EB;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;">🏋️</div>
+          <div style="flex:1;min-width:0;">
+            <div style="font-size:12px;font-weight:600;color:var(--text-primary);">Fitness | Gym Monthly</div>
+            <div style="font-size:10px;color:var(--text-muted);">20 Jun 2026 · 11:00 AM</div>
+          </div>
+          <div style="font-size:13px;font-weight:700;color:#D93030;flex-shrink:0;">−₹799</div>
+        </div>
+        <!-- Row 7 -->
+        <div style="display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid var(--border);">
+          <div style="width:36px;height:36px;border-radius:12px;background:#FEF3DC;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;">📱</div>
+          <div style="flex:1;min-width:0;">
+            <div style="font-size:12px;font-weight:600;color:var(--text-primary);">Recharge | Mobile Plan</div>
+            <div style="font-size:10px;color:var(--text-muted);">19 Jun 2026 · 7:45 PM</div>
+          </div>
+          <div style="font-size:13px;font-weight:700;color:#D93030;flex-shrink:0;">−₹239</div>
+        </div>
+        <!-- Row 8 -->
+        <div style="display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid var(--border);">
+          <div style="width:36px;height:36px;border-radius:12px;background:#E8E6F8;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;">🎬</div>
+          <div style="flex:1;min-width:0;">
+            <div style="font-size:12px;font-weight:600;color:var(--text-primary);">Subscription | OTT</div>
+            <div style="font-size:10px;color:var(--text-muted);">19 Jun 2026 · 2:30 PM</div>
+          </div>
+          <div style="font-size:13px;font-weight:700;color:#D93030;flex-shrink:0;">−₹149</div>
+        </div>
+        <!-- Row 9 -->
+        <div style="display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid var(--border);">
+          <div style="width:36px;height:36px;border-radius:12px;background:#E6F1FB;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;">🛵</div>
+          <div style="flex:1;min-width:0;">
+            <div style="font-size:12px;font-weight:600;color:var(--text-primary);">Delivery | Swiggy Order</div>
+            <div style="font-size:10px;color:var(--text-muted);">18 Jun 2026 · 8:55 PM</div>
+          </div>
+          <div style="font-size:13px;font-weight:700;color:#D93030;flex-shrink:0;">−₹375</div>
+        </div>
+        <!-- Row 10 -->
+        <div style="display:flex;align-items:center;gap:12px;padding:10px 0;">
+          <div style="width:36px;height:36px;border-radius:12px;background:#FCE8F3;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;">💇</div>
+          <div style="flex:1;min-width:0;">
+            <div style="font-size:12px;font-weight:600;color:var(--text-primary);">Personal | Haircut</div>
+            <div style="font-size:10px;color:var(--text-muted);">17 Jun 2026 · 12:10 PM</div>
+          </div>
+          <div style="font-size:13px;font-weight:700;color:#D93030;flex-shrink:0;">−₹200</div>
+        </div>
+      </div>
+
+      <div style="padding:10px 20px 18px;text-align:center;">
+        <div style="font-size:11px;color:var(--text-muted);">+ more transactions in the app</div>
+      </div>
+    </div>
+
+    <!-- RIGHT: feature highlights -->
+    <div style="display:flex;flex-direction:column;gap:20px;padding-top:8px;">
+      <div>
+        <div class="section-eyebrow">Budget Tracker</div>
+        <div class="section-title" style="font-size:clamp(24px,3vw,38px);margin-top:8px;">Spending clarity,<br>every single day</div>
+        <p style="font-size:16px;line-height:1.7;color:var(--text-secondary);margin-top:12px;">LOG's budget tracker shows you exactly where you stand — with a live over-limit warning, category-wise history, and a 7-day bar chart that updates the moment you log an expense.</p>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:12px;">
+        <div style="display:flex;align-items:flex-start;gap:14px;padding:16px;background:#fff;border-radius:16px;border:1px solid var(--border);">
+          <div style="width:40px;height:40px;border-radius:12px;background:var(--purple-light);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;">📊</div>
+          <div>
+            <div style="font-size:14px;font-weight:600;color:var(--text-primary);margin-bottom:3px;">Weekly & Monthly views</div>
+            <div style="font-size:13px;color:var(--text-secondary);line-height:1.5;">Switch between 7-day bar chart and full monthly overview in one tap.</div>
+          </div>
+        </div>
+        <div style="display:flex;align-items:flex-start;gap:14px;padding:16px;background:#fff;border-radius:16px;border:1px solid var(--border);">
+          <div style="width:40px;height:40px;border-radius:12px;background:#E0F5EB;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;">🏷️</div>
+          <div>
+            <div style="font-size:14px;font-weight:600;color:var(--text-primary);margin-bottom:3px;">Category tagging</div>
+            <div style="font-size:13px;color:var(--text-secondary);line-height:1.5;">Groceries, dining, transport, supplements — every expense filed automatically.</div>
+          </div>
+        </div>
+        <div style="display:flex;align-items:flex-start;gap:14px;padding:16px;background:#fff;border-radius:16px;border:1px solid var(--border);">
+          <div style="width:40px;height:40px;border-radius:12px;background:#FFE8E8;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;">🔔</div>
+          <div>
+            <div style="font-size:14px;font-weight:600;color:var(--text-primary);margin-bottom:3px;">Over-limit alerts</div>
+            <div style="font-size:13px;color:var(--text-secondary);line-height:1.5;">The progress bar turns red and shows exactly how much you've gone over — no surprises.</div>
+          </div>
+        </div>
+        <div style="display:flex;align-items:flex-start;gap:14px;padding:16px;background:#fff;border-radius:16px;border:1px solid var(--border);">
+          <div style="width:40px;height:40px;border-radius:12px;background:#FEF3DC;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;">⚡</div>
+          <div>
+            <div style="font-size:14px;font-weight:600;color:var(--text-primary);margin-bottom:3px;">Log in under 5 seconds</div>
+            <div style="font-size:13px;color:var(--text-secondary);line-height:1.5;">Tap the + button, type the amount and category — done. No friction, no forms.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="cta-title">Start your streak<br><span>today.</span></div>
+  <p class="cta-sub">Free to download. No account needed to begin. Your first star is one tap away.</p>
+  <div class="cta-btns">
+    <button class="btn-gold">Download for Android</button>
+    <button class="btn-outline-white">Coming soon on iOS</button>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-logo">LOG</div>
+  <div class="footer-links">
+    <a href="#">Privacy</a>
+    <a href="#">Terms</a>
+    <a href="#">Contact</a>
+    <a href="#">Dev Log</a>
+  </div>
+  <div class="footer-copy">© 2026 LOG App. Built with intention.</div>
+</footer>
+
+</body>
+</html>
